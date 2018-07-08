@@ -4,6 +4,21 @@ import 'react-chat-elements/dist/main.css';
 import { ChatList, Navbar, MessageList, Input, Button } from 'react-chat-elements';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      messages: [
+        {
+          position: 'right',
+          type: 'text',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+          date: new Date(),
+        }
+      ]
+    };
+  };
+
   render() {
     return (
       <div className='container'>
@@ -34,14 +49,7 @@ export default class Login extends Component {
             className='message-list'
             lockable={true}
             toBottomHeight={'100%'}
-            dataSource={[
-              {
-                position: 'right',
-                type: 'text',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-                date: new Date(),
-              }
-            ]} />
+            dataSource={this.state.messages} />
           <Input
             className='input-area'
             placeholder="Type here..."
@@ -50,7 +58,14 @@ export default class Login extends Component {
               <Button
                 color='white'
                 backgroundColor='black'
-                text='Send'/>
+                text='Send'
+                onClick={() => {this.setState((state) => ({messages: state.messages.concat({
+                    position: 'right',
+                    type: 'text',
+                    text: 'Some Text',
+                    date: new Date(),
+                  })}))}}
+              />
             }/>
         </div>
       </div>
